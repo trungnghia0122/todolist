@@ -9,7 +9,7 @@ function App() {
   const [selectedTab, setSelectedTabs] = useState("Open")
 
   function handleAddTodo(newTodo) {
-    const newList = [...todos, { input: newTodo, completed: false }]
+    const newList = [...todos, { id: "2", input: newTodo, completed: false }]
     setTodos(newList)
     localStorage.setItem("todo-app", JSON.stringify(newList))
   }
@@ -50,7 +50,7 @@ function App() {
         selectedTab={selectedTab}
         todos={todos}
       />
-      <TodoInput handleAddTodo={handleAddTodo} />
+      <TodoInput todos={todos} handleAddTodo={handleAddTodo} />
     </>
   )
 }

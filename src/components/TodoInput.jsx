@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export function TodoInput(props) {
-  const { handleAddTodo } = props
+  const { todos, handleAddTodo } = props
   const [input, setInput] = useState("")
 
   return (
@@ -12,9 +12,9 @@ export function TodoInput(props) {
         onChange={(e) => setInput(e.target.value)}
       />
       <button
-        disabled={!input}
+        disabled={!input || todos.some((t) => t.input === input)}
         onClick={() => {
-          handleAddTodo(input)
+          if (input) handleAddTodo(input)
           setInput("")
         }}
       >
