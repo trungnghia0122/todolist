@@ -2,15 +2,16 @@ import { Header } from "./components/Header"
 import { Tabs } from "./components/Tabs"
 import { TodoList } from "./components/TodoList"
 import { TodoInput } from "./components/TodoInput"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function App() {
-  const [todos, setTodos] = useState([{ input: "go to gym", completed: true }])
+  const [todos, setTodos] = useState([])
   const [selectedTab, setSelectedTabs] = useState("Open")
 
   function handleAddTodo(newTodo) {
     const newList = [...todos, { input: newTodo, completed: false }]
     setTodos(newList)
+    localStorage.setItem("todo-app", JSON.stringify(newList))
   }
 
   function handleComplete(index) {
@@ -19,12 +20,21 @@ function App() {
     completedTodo["completed"] = true
     newList[index] = completedTodo
     setTodos(newList)
+    localStorage.setItem("todo-app", JSON.stringify(newList))
   }
 
   function handleDelete(index) {
     const newList = todos.filter((todo, i) => i !== index)
     setTodos(newList)
+    localStorage.setItem("todo-app", JSON.stringify(newList))
   }
+
+  useEffect(() => {
+    if (!localStorage || !localStorage.getItem("todo-app")) return
+    let db = []
+    db = JSON.parse(localStorage.getItem("todo-app"))
+    setTodos(db)
+  }, [])
 
   return (
     <>

@@ -18,10 +18,8 @@ export function TodoInput(props) {
           setInput("")
         }}
       >
-        <i class='fa-solid fa-plus'></i>
+        <i className='fa-solid fa-plus'></i>
       </button>
     </div>
   )
 }
-
-
