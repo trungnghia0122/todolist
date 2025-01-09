@@ -316,7 +316,6 @@ select:hover {
   border-color: var(--border-highlight);
 }
 
-
 .card,
 .button-card {
   background-color: var(--background-muted);

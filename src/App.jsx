@@ -9,9 +9,9 @@ function App() {
   const [selectedTab, setSelectedTabs] = useState("Open")
 
   function handleAddTodo(newTodo) {
-    const newList = [...todos, { id: "2", input: newTodo, completed: false }]
+    const newList = [...todos, { input: newTodo, completed: false }]
     setTodos(newList)
-    localStorage.setItem("todo-app", JSON.stringify(newList))
+    handleSaveData(newList)
   }
 
   function handleComplete(index) {
@@ -20,19 +20,22 @@ function App() {
     completedTodo["completed"] = true
     newList[index] = completedTodo
     setTodos(newList)
-    localStorage.setItem("todo-app", JSON.stringify(newList))
+    handleSaveData(newList)
   }
 
   function handleDelete(index) {
     const newList = todos.filter((todo, i) => i !== index)
     setTodos(newList)
-    localStorage.setItem("todo-app", JSON.stringify(newList))
+    handleSaveData(newList)
+  }
+
+  function handleSaveData(currentList) {
+    localStorage.setItem("todo-app", JSON.stringify(currentList))
   }
 
   useEffect(() => {
     if (!localStorage || !localStorage.getItem("todo-app")) return
-    let db = []
-    db = JSON.parse(localStorage.getItem("todo-app"))
+    const db = JSON.parse(localStorage.getItem("todo-app"))
     setTodos(db)
   }, [])
 
